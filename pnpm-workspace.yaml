@@ -5,6 +5,7 @@ onlyBuiltDependencies:
   - cypress
   - esbuild
   - msw
+  - sharp
   - unrs-resolver
 
 patchedDependencies:
