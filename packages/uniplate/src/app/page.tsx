@@ -101,9 +101,6 @@ export default function BrandEditorPage() {
 
     const hasTemplate = !!editor.session;
 
-    // ── Open Frontify Asset Chooser ──
-    // In a real Frontify Platform App this would call appBridge.dispatch(openAssetChooser)
-    // Here we fall back to a simple file input for demo purposes
     const handleOpenAssetChooser = (layerId: string) => {
         const input = document.createElement('input');
         input.type = 'file';

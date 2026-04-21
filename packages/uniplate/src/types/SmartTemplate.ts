@@ -69,8 +69,7 @@ export type LayerConstraints = {
     validation?: ValidationRule[];
     /** If set, restricts color choices to named brand palette */
     allowedColorPaletteIds?: string[];
-    /** If set, restricts asset picks to these Frontify project IDs */
-    allowedProjectIds?: number[];
+
 };
 
 // ─── Layer Types ──────────────────────────────────────────────────────────────
@@ -116,7 +115,6 @@ export type TextProperties = {
 };
 
 export type ImageProperties = {
-    /** Frontify asset ID — null means placeholder */
     assetId: number | null;
     src: string | null;
     objectFit: 'cover' | 'contain' | 'fill' | 'none';
@@ -182,7 +180,6 @@ export type BrandFont = {
 export type BrandLogo = {
     id: string;
     name: string;
-    /** Frontify asset ID */
     assetId: number;
     previewUrl: string;
     /** Designers mark logos as locked — non-designers may not swap them */
@@ -222,9 +219,7 @@ export type SmartTemplate = {
     metadata: {
         createdAt: string;
         updatedAt: string;
-        /** Frontify user display name */
         author: string;
-        /** Frontify project the template belongs to */
         projectId?: number;
         tags: string[];
         /** Source file format that was imported */

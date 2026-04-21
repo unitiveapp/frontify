@@ -9,19 +9,15 @@ import type { SmartTemplate } from '../types/SmartTemplate';
 
 type TemplateUploaderProps = {
     onTemplateLoaded: (template: SmartTemplate) => void;
-    /** Called when user wants to open the Frontify native template chooser */
-    onOpenFrontifyChooser?: () => void;
-    /** Whether the Frontify AppBridge is available (platform app context) */
-    hasFrontifyBridge?: boolean;
 };
 
-type IngestionTab = 'upload' | 'figma' | 'frontify' | 'blank';
+type IngestionTab = 'upload' | 'figma' | 'blank';
 
 const ACCEPTED_EXTENSIONS = ['.psd', '.svg', '.idml', '.sketch', '.pdf'];
 
 // ─── Upload tab ───────────────────────────────────────────────────────────────
 
-function FileUploadTab({ onTemplateLoaded }: Pick<TemplateUploaderProps, 'onTemplateLoaded'>) {
+function FileUploadTab({ onTemplateLoaded }: TemplateUploaderProps) {
     const [isDragging, setIsDragging] = useState(false);
     const [isUploading, setIsUploading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -113,7 +109,7 @@ function FileUploadTab({ onTemplateLoaded }: Pick<TemplateUploaderProps, 'onTemp
 
 // ─── Figma tab ────────────────────────────────────────────────────────────────
 
-function FigmaTab({ onTemplateLoaded }: Pick<TemplateUploaderProps, 'onTemplateLoaded'>) {
+function FigmaTab({ onTemplateLoaded }: TemplateUploaderProps) {
     const [url, setUrl] = useState('');
     const [token, setToken] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -149,7 +145,7 @@ function FigmaTab({ onTemplateLoaded }: Pick<TemplateUploaderProps, 'onTemplateL
                 <span className="text-xl mt-0.5">🔷</span>
                 <div className="text-sm text-blue-800">
                     <p className="font-semibold">Import from Figma</p>
-                    <p className="text-blue-600 mt-1">The first frame on the first page is imported as a SmartTemplate. Layers named <code className="bg-blue-100 px-1 rounded">!Name</code> are brand-locked; <code className="bg-blue-100 px-1 rounded">Name*</code> are required.</p>
+                    <p className="text-blue-600 mt-1">The first frame on the first page is imported. Layers named <code className="bg-blue-100 px-1 rounded">!Name</code> are brand-locked; <code className="bg-blue-100 px-1 rounded">Name*</code> are required.</p>
                 </div>
             </div>
 
@@ -196,65 +192,18 @@ function FigmaTab({ onTemplateLoaded }: Pick<TemplateUploaderProps, 'onTemplateL
     );
 }
 
-// ─── Frontify chooser tab ─────────────────────────────────────────────────────
-
-function FrontifyChooserTab({ onOpenFrontifyChooser, hasFrontifyBridge }: Pick<TemplateUploaderProps, 'onOpenFrontifyChooser' | 'hasFrontifyBridge'>) {
-    return (
-        <div className="space-y-4">
-            <div className="flex items-start gap-3 bg-purple-50 border border-purple-100 rounded-xl p-4">
-                <span className="text-xl mt-0.5">🏷</span>
-                <div className="text-sm text-purple-800">
-                    <p className="font-semibold">Frontify Template Library</p>
-                    <p className="text-purple-600 mt-1">
-                        Select a template from your Frontify brand portal. The preview image is imported
-                        as a guide layer, and you can build editable fields on top.
-                    </p>
-                </div>
-            </div>
-
-            {/* Architecture reference */}
-            <div className="bg-gray-50 rounded-xl border border-gray-100 p-4 text-xs font-mono text-gray-500 space-y-1">
-                <p className="font-semibold text-gray-600 not-italic text-[11px] uppercase tracking-wider mb-2">How it works</p>
-                {[
-                    'appBridge.dispatch(openTemplateChooser())',
-                    '→ event: templateChosen  { template: TemplateLegacy }',
-                    '→ frontifyLegacyTemplateToSmartTemplate(template)',
-                    '→ SmartTemplate (preview layer + editable scaffold)',
-                    '→ appBridge.updateBlockSettings(serializeSmartTemplate(...))',
-                ].map((line, i) => <p key={i}>{line}</p>)}
-            </div>
-
-            <button
-                type="button"
-                className={['w-full py-2.5 rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-2', hasFrontifyBridge ? 'bg-purple-600 text-white hover:bg-purple-700' : 'bg-gray-100 text-gray-400 cursor-not-allowed'].join(' ')}
-                onClick={hasFrontifyBridge ? onOpenFrontifyChooser : undefined}
-                disabled={!hasFrontifyBridge}
-                title={hasFrontifyBridge ? 'Open template chooser' : 'Only available inside a Frontify Platform App'}
-            >
-                {hasFrontifyBridge ? '🏷 Open Frontify Template Chooser' : '⚠ Requires Frontify App Context'}
-            </button>
-
-            {!hasFrontifyBridge && (
-                <p className="text-xs text-gray-400 text-center">
-                    Deploy this as a Frontify Platform App and pass an AppBridgeBlock instance to enable this.
-                </p>
-            )}
-        </div>
-    );
-}
-
 // ─── Blank templates ──────────────────────────────────────────────────────────
 
 const BLANK_PRESETS = [
-    { label: 'IG Post', platform: 'instagram-post' as const, w: 1080, h: 1080, aspect: '1/1' },
-    { label: 'IG Story', platform: 'instagram-story' as const, w: 1080, h: 1920, aspect: '9/16' },
-    { label: 'LinkedIn', platform: 'linkedin-post' as const, w: 1200, h: 627, aspect: '1.91/1' },
-    { label: 'Twitter', platform: 'twitter-post' as const, w: 1600, h: 900, aspect: '16/9' },
-    { label: 'YouTube', platform: 'youtube-thumbnail' as const, w: 1280, h: 720, aspect: '16/9' },
-    { label: 'Pinterest', platform: 'pinterest-pin' as const, w: 1000, h: 1500, aspect: '2/3' },
+    { label: 'IG Post', platform: 'instagram-post' as const, w: 1080, h: 1080 },
+    { label: 'IG Story', platform: 'instagram-story' as const, w: 1080, h: 1920 },
+    { label: 'LinkedIn', platform: 'linkedin-post' as const, w: 1200, h: 627 },
+    { label: 'Twitter', platform: 'twitter-post' as const, w: 1600, h: 900 },
+    { label: 'YouTube', platform: 'youtube-thumbnail' as const, w: 1280, h: 720 },
+    { label: 'Pinterest', platform: 'pinterest-pin' as const, w: 1000, h: 1500 },
 ];
 
-function BlankTab({ onTemplateLoaded }: Pick<TemplateUploaderProps, 'onTemplateLoaded'>) {
+function BlankTab({ onTemplateLoaded }: TemplateUploaderProps) {
     return (
         <div className="grid grid-cols-3 gap-3">
             {BLANK_PRESETS.map(({ label, platform, w, h }) => (
@@ -278,13 +227,12 @@ function BlankTab({ onTemplateLoaded }: Pick<TemplateUploaderProps, 'onTemplateL
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 
-export function TemplateUploader({ onTemplateLoaded, onOpenFrontifyChooser, hasFrontifyBridge = false }: TemplateUploaderProps) {
+export function TemplateUploader({ onTemplateLoaded }: TemplateUploaderProps) {
     const [tab, setTab] = useState<IngestionTab>('upload');
 
     const tabs: { id: IngestionTab; label: string; icon: string }[] = [
         { id: 'upload', label: 'File Upload', icon: '📁' },
         { id: 'figma', label: 'Figma', icon: '🔷' },
-        { id: 'frontify', label: 'Frontify', icon: '🏷' },
         { id: 'blank', label: 'Blank', icon: '✦' },
     ];
 
@@ -293,12 +241,11 @@ export function TemplateUploader({ onTemplateLoaded, onOpenFrontifyChooser, hasF
             <div className="text-center max-w-lg">
                 <h2 className="text-2xl font-bold text-gray-800">Uniplate</h2>
                 <p className="mt-2 text-gray-500 text-sm">
-                    Import a Photoshop, InDesign, SVG, Sketch, PDF, or Figma design — or start from a blank canvas. Brand-locked layers are preserved automatically.
+                    Import a Photoshop, InDesign, SVG, Sketch, PDF, or Figma design — or start from a blank canvas.
                 </p>
             </div>
 
             <div className="w-full max-w-lg">
-                {/* Tabs */}
                 <div className="flex border-b border-gray-200 mb-5">
                     {tabs.map(({ id, label, icon }) => (
                         <button
@@ -314,7 +261,6 @@ export function TemplateUploader({ onTemplateLoaded, onOpenFrontifyChooser, hasF
 
                 {tab === 'upload' && <FileUploadTab onTemplateLoaded={onTemplateLoaded} />}
                 {tab === 'figma' && <FigmaTab onTemplateLoaded={onTemplateLoaded} />}
-                {tab === 'frontify' && <FrontifyChooserTab onOpenFrontifyChooser={onOpenFrontifyChooser} hasFrontifyBridge={hasFrontifyBridge} />}
                 {tab === 'blank' && <BlankTab onTemplateLoaded={onTemplateLoaded} />}
             </div>
         </div>
