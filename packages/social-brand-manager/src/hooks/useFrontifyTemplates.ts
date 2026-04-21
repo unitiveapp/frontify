@@ -25,8 +25,8 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import type { AppBridgeBlock, TemplateLegacy } from '@frontify/app-bridge';
-import { openTemplateChooser } from '@frontify/app-bridge';
+import type { AppBridgeBlock, TemplateLegacy } from '../types/FrontifyTypes';
+import { openTemplateChooser } from '../types/FrontifyTypes';
 import {
     frontifyTemplateToSmartTemplate,
     frontifyLegacyTemplateToSmartTemplate,

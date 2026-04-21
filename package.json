@@ -1,5 +1,5 @@
 {
-    "name": "root",
+    "name": "frontify-social-brand",
     "private": true,
     "packageManager": "pnpm@10.24.0+sha512.01ff8ae71b4419903b65c60fb2dc9d34cf8bb6e06d03bde112ef38f7a34d6904c424ba66bea5cdcf12890230bf39f9580473140ed9c946fef328b6e5238a345a",
     "engines": {
@@ -7,42 +7,10 @@
         "npm": "<=0"
     },
     "scripts": {
-        "build": "pnpm build:app-bridge && pnpm build:app-bridge-theme &&  pnpm build:sidebar-settings && pnpm build:guideline-blocks-settings && pnpm build:guideline-themes && pnpm build:platform-app && pnpm build:cli && pnpm build:app-bridge-app",
-        "build:app-bridge": "pnpm --stream --filter {packages/app-bridge} build",
-        "build:app-bridge-app": "pnpm --stream --filter {packages/app-bridge-app} build",
-        "build:app-bridge-theme": "pnpm --stream --filter {packages/app-bridge-theme} build",
-        "build:sidebar-settings": "pnpm --stream --filter {packages/sidebar-settings} build",
-        "build:guideline-blocks-settings": "pnpm --stream --filter {packages/guideline-blocks-settings} build",
-        "build:guideline-themes": "pnpm --stream --filter {packages/guideline-themes} build",
-        "build:platform-app": "pnpm --stream --filter {packages/platform-app} build",
-        "build:cli": "pnpm --stream --filter {packages/cli} build",
-        "lint": "pnpm --stream --filter {packages/**} --parallel lint --quiet",
-        "lint:fix": "pnpm --stream --filter {packages/**} --parallel lint:fix",
-        "test": "pnpm --stream --filter {packages/**} test",
-        "test:components": "cypress run --component",
-        "test:components:browser": "cypress open --component",
-        "typecheck": "pnpm --stream --filter {packages/**} --parallel typecheck",
-        "release": "pnpm build && changeset publish",
-        "update": "taze -r -I major"
-    },
-    "devDependencies": {
-        "@4tw/cypress-drag-drop": "^2.3.1",
-        "@changesets/changelog-github": "^0.5.2",
-        "@changesets/cli": "^2.29.8",
-        "@cypress/vite-dev-server": "^7.0.1",
-        "@frontify/fondue": "^12.14.5",
-        "@types/react": "^18.3.27",
-        "@vitejs/plugin-react": "^5.1.1",
-        "cypress": "^15.7.1",
-        "cypress-real-events": "^1.15.0",
-        "glob": "^13.0.0",
-        "react": "^18.3.1",
-        "react-dom": "^18.3.1",
-        "tailwindcss": "^3.4.18",
-        "taze": "^19.9.2",
-        "ts-node": "^10.9.2",
-        "typescript": "^5.9.3",
-        "vite": "^7.2.6",
-        "vitest": "^4.0.15"
+        "dev": "pnpm --filter social-brand-manager dev",
+        "build": "pnpm --filter social-brand-manager build",
+        "start": "pnpm --filter social-brand-manager start",
+        "lint": "pnpm --filter social-brand-manager lint",
+        "typecheck": "pnpm --filter social-brand-manager typecheck"
     }
 }

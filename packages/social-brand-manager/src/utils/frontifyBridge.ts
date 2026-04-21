@@ -74,7 +74,7 @@
  */
 
 import { v4 as uuidv4 } from 'uuid';
-import type { Template, TemplateLegacy } from '@frontify/app-bridge';
+import type { Template, TemplateLegacy } from '../types/FrontifyTypes';
 import type {
     BrandGuardrails,
     Layer,

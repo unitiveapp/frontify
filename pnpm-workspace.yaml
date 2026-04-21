@@ -2,11 +2,4 @@ packages:
   - packages/*
 
 onlyBuiltDependencies:
-  - cypress
-  - esbuild
-  - msw
   - sharp
-  - unrs-resolver
-
-patchedDependencies:
-  '@udecode/plate-emoji': patches/@udecode__plate-emoji.patch

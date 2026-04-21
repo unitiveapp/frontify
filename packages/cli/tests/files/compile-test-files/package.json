@@ -1,8 +1,0 @@
-{
-    "name": "test-block",
-    "version": "1.0.0",
-    "main": "src/index.ts",
-    "dependencies": {
-        "@frontify/app-bridge": "^3.12.0"
-    }
-}

@@ -11,8 +11,6 @@
         "typecheck": "tsc --noEmit"
     },
     "dependencies": {
-        "@frontify/app-bridge": "workspace:*",
-        "@frontify/fondue": "^12.14.5",
         "ag-psd": "^17.2.7",
         "fabric": "^6.4.3",
         "jszip": "^3.10.1",

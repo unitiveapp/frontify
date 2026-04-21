@@ -2,7 +2,6 @@
 
 'use client';
 
-import type { Asset } from '@frontify/app-bridge';
 import type {
     BrandColor,
     EditorLayerOverride,

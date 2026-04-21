@@ -1,6 +1,0 @@
-node_modules
-dist
-.idea
-coverage
-.DS_Store
-package.json.d.ts
