@@ -367,7 +367,7 @@ export function parseFigmaDocument(file: FigmaFile, pageIndex = 0): SmartTemplat
             updatedAt: new Date().toISOString(),
             author: 'Imported from Figma',
             tags: ['figma'],
-            sourceFormat: 'svg', // closest available — extend SmartTemplate.sourceFormat if needed
+            sourceFormat: 'figma',
             originalFileName: `${fileKey}.figma`,
         },
     };

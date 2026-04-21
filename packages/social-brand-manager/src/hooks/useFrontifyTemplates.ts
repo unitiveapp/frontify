@@ -24,8 +24,9 @@
 
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import type { AppBridgeBlock } from '@frontify/app-bridge';
+import { useCallback, useEffect, useState } from 'react';
+import type { AppBridgeBlock, TemplateLegacy } from '@frontify/app-bridge';
+import { openTemplateChooser } from '@frontify/app-bridge';
 import {
     frontifyTemplateToSmartTemplate,
     frontifyLegacyTemplateToSmartTemplate,
@@ -137,15 +138,11 @@ export function useFrontifyTemplates({
     const openChooser = useCallback(() => {
         if (!appBridge) return;
 
-        // Dispatch the openTemplateChooser command (from app-bridge registries)
-        import('@frontify/app-bridge').then(({ openTemplateChooser }) => {
-            appBridge.dispatch(openTemplateChooser());
-        }).catch(() => { /* app-bridge not available */ });
+        appBridge.dispatch(openTemplateChooser());
 
-        // Subscribe to templateChosen event
         const unsubscribe = appBridge.subscribe('templateChosen', async (event) => {
             unsubscribe();
-            const chosenLegacy = (event as { template: import('@frontify/app-bridge').TemplateLegacy }).template;
+            const chosenLegacy = (event as { template: TemplateLegacy }).template;
             if (!chosenLegacy) return;
 
             const smart = frontifyLegacyTemplateToSmartTemplate(chosenLegacy);
