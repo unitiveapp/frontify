@@ -228,7 +228,7 @@ export type SmartTemplate = {
         projectId?: number;
         tags: string[];
         /** Source file format that was imported */
-        sourceFormat: 'psd' | 'idml' | 'svg' | 'figma' | 'manual';
+        sourceFormat: 'psd' | 'idml' | 'svg' | 'sketch' | 'pdf' | 'figma' | 'manual';
         originalFileName?: string;
     };
 };

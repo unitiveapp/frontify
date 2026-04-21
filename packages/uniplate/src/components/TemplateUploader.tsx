@@ -17,7 +17,7 @@ type TemplateUploaderProps = {
 
 type IngestionTab = 'upload' | 'figma' | 'frontify' | 'blank';
 
-const ACCEPTED_EXTENSIONS = ['.psd', '.svg', '.idml'];
+const ACCEPTED_EXTENSIONS = ['.psd', '.svg', '.idml', '.sketch', '.pdf'];
 
 // ─── Upload tab ───────────────────────────────────────────────────────────────
 
@@ -70,11 +70,13 @@ function FileUploadTab({ onTemplateLoaded }: Pick<TemplateUploaderProps, 'onTemp
                         <div className="flex gap-3 text-3xl">
                             <span title="Photoshop">📄</span>
                             <span title="InDesign">📰</span>
+                            <span title="Sketch">💎</span>
+                            <span title="PDF">📑</span>
                             <span title="SVG">🎨</span>
                         </div>
                         <div className="text-center">
                             <p className="text-gray-700 font-medium text-sm">Drag & drop your template</p>
-                            <p className="text-xs text-gray-400 mt-1">PSD · IDML · SVG</p>
+                            <p className="text-xs text-gray-400 mt-1">PSD · IDML · SVG · Sketch · PDF</p>
                         </div>
                         <label className="px-4 py-1.5 bg-brand-500 text-white rounded-lg text-sm font-medium cursor-pointer hover:bg-brand-600 transition-colors">
                             Browse
@@ -85,11 +87,13 @@ function FileUploadTab({ onTemplateLoaded }: Pick<TemplateUploaderProps, 'onTemp
             </div>
 
             {/* Format guide */}
-            <div className="grid grid-cols-3 gap-2 text-xs text-gray-500">
+            <div className="grid grid-cols-5 gap-2 text-xs text-gray-500">
                 {[
                     { ext: '.psd', label: 'Photoshop', hint: 'Prefix layers with ! to lock them' },
                     { ext: '.idml', label: 'InDesign', hint: 'Stories + Styles extracted automatically' },
                     { ext: '.svg', label: 'SVG', hint: 'id="locked-*" locks a layer' },
+                    { ext: '.sketch', label: 'Sketch', hint: 'isLocked layers + !Name convention' },
+                    { ext: '.pdf', label: 'PDF', hint: 'Each page rendered as a background layer' },
                 ].map(({ ext, label, hint }) => (
                     <div key={ext} className="bg-gray-50 rounded-lg p-3 border border-gray-100">
                         <p className="font-mono font-bold text-gray-700">{ext}</p>
@@ -289,7 +293,7 @@ export function TemplateUploader({ onTemplateLoaded, onOpenFrontifyChooser, hasF
             <div className="text-center max-w-lg">
                 <h2 className="text-2xl font-bold text-gray-800">Uniplate</h2>
                 <p className="mt-2 text-gray-500 text-sm">
-                    Import a Photoshop, InDesign, SVG, or Figma design — or start from a blank canvas. Brand-locked layers are preserved automatically.
+                    Import a Photoshop, InDesign, SVG, Sketch, PDF, or Figma design — or start from a blank canvas. Brand-locked layers are preserved automatically.
                 </p>
             </div>
 

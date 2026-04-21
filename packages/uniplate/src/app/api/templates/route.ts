@@ -4,6 +4,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { parsePsd } from '../../../utils/psdParser';
 import { parseSvg } from '../../../utils/svgParser';
 import { parseIdml } from '../../../utils/idmlParser';
+import { parseSketch } from '../../../utils/sketchParser';
+import { parsePdf } from '../../../utils/pdfParser';
 import { parseFigmaFile, extractFigmaFileKey } from '../../../utils/figmaParser';
 import type { SmartTemplate, TemplateUploadResponse } from '../../../types/SmartTemplate';
 
@@ -70,9 +72,29 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
                     break;
                 }
 
+                case 'sketch': {
+                    const buf = await file.arrayBuffer();
+                    template = await parseSketch(buf, fileName);
+                    if (template.layers.length === 0) {
+                        warnings.push('No layers found in Sketch file. Ensure the first page has an artboard with content.');
+                    }
+                    break;
+                }
+
+                case 'pdf': {
+                    const buf = await file.arrayBuffer();
+                    template = await parsePdf(buf, fileName);
+                    if (template.layers.length === 0) {
+                        warnings.push('No pages could be rendered from the PDF.');
+                    } else if (template.layers.length > 1) {
+                        warnings.push(`${template.layers.length} pages imported as background layers. Add editable text/image layers on top in the editor.`);
+                    }
+                    break;
+                }
+
                 default:
                     return NextResponse.json(
-                        { error: `Unsupported file type ".${ext}". Accepted: .psd, .svg, .idml` },
+                        { error: `Unsupported file type ".${ext}". Accepted: .psd, .svg, .idml, .sketch, .pdf` },
                         { status: 422 },
                     );
             }
