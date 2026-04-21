@@ -14,7 +14,7 @@ WORKDIR /app
 COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
 COPY packages/uniplate/package.json ./packages/uniplate/
 
-RUN pnpm install --frozen-lockfile --filter uniplate...
+RUN pnpm install --no-frozen-lockfile --filter uniplate...
 
 COPY packages/uniplate ./packages/uniplate/
 
@@ -38,7 +38,7 @@ WORKDIR /app
 COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
 COPY packages/uniplate/package.json ./packages/uniplate/
 
-RUN pnpm install --frozen-lockfile --filter uniplate... --prod
+RUN pnpm install --no-frozen-lockfile --filter uniplate... --prod
 
 COPY --from=builder /app/packages/uniplate/.next ./packages/uniplate/.next
 COPY --from=builder /app/packages/uniplate/public ./packages/uniplate/public
