@@ -1,4 +1,4 @@
-/* (c) Copyright Frontify Ltd., all rights reserved. */
+/* (c) Copyright Unitiveapp, all rights reserved. */
 
 import { NextRequest, NextResponse } from 'next/server';
 import { renderTemplate } from '../../../utils/renderer';

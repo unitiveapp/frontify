@@ -1,8 +1,8 @@
 {
-    "name": "@frontify/social-brand-manager",
+    "name": "uniplate",
     "version": "0.0.1",
     "private": true,
-    "description": "Brand management engine for social media publishing with Smart Templates, brand constraints, and headless rendering",
+    "description": "Brand template engine — design-to-publish for social media with locked brand guardrails",
     "scripts": {
         "dev": "next dev --port 3100",
         "build": "next build",

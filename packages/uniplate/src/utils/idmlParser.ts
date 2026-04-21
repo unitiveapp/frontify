@@ -1,4 +1,4 @@
-/* (c) Copyright Frontify Ltd., all rights reserved. */
+/* (c) Copyright Unitiveapp, all rights reserved. */
 
 /**
  * IDML (InDesign Markup Language) → SmartTemplate parser.

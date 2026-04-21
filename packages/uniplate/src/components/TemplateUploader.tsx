@@ -1,4 +1,4 @@
-/* (c) Copyright Frontify Ltd., all rights reserved. */
+/* (c) Copyright Unitiveapp, all rights reserved. */
 
 'use client';
 
@@ -287,7 +287,7 @@ export function TemplateUploader({ onTemplateLoaded, onOpenFrontifyChooser, hasF
     return (
         <div className="flex flex-col items-center justify-center h-full p-8 gap-6">
             <div className="text-center max-w-lg">
-                <h2 className="text-2xl font-bold text-gray-800">Brand Template Editor</h2>
+                <h2 className="text-2xl font-bold text-gray-800">Uniplate</h2>
                 <p className="mt-2 text-gray-500 text-sm">
                     Import a Photoshop, InDesign, SVG, or Figma design — or start from a blank canvas. Brand-locked layers are preserved automatically.
                 </p>

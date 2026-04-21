@@ -1,4 +1,4 @@
-/* (c) Copyright Frontify Ltd., all rights reserved. */
+/* (c) Copyright Unitiveapp, all rights reserved. */
 
 'use client';
 
@@ -121,9 +121,7 @@ export default function BrandEditorPage() {
         return (
             <main className="h-screen flex flex-col">
                 <header className="h-12 bg-white border-b border-gray-200 flex items-center px-6">
-                    <span className="text-sm font-bold text-brand-600">Frontify</span>
-                    <span className="mx-2 text-gray-300">|</span>
-                    <span className="text-sm text-gray-600">Social Brand Manager</span>
+                    <span className="text-sm font-bold text-brand-600">Uniplate</span>
                 </header>
                 <div className="flex-1 overflow-auto">
                     <TemplateUploader onTemplateLoaded={editor.loadTemplate} />

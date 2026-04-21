@@ -1,4 +1,4 @@
-/* (c) Copyright Frontify Ltd., all rights reserved. */
+/* (c) Copyright Unitiveapp, all rights reserved. */
 
 import { DOMParser } from 'xmldom';
 import { v4 as uuidv4 } from 'uuid';
