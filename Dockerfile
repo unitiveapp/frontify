@@ -1,4 +1,3 @@
-# Single-stage build — simpler and avoids monorepo path issues
 FROM node:24-bookworm-slim
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -7,18 +6,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3 make g++ \
  && rm -rf /var/lib/apt/lists/*
 
-RUN corepack enable && corepack prepare pnpm@latest --activate
-
 WORKDIR /app
 
-COPY . .
+# Copy only the uniplate package — skip workspace lockfile entirely
+COPY packages/uniplate/package.json ./package.json
 
-RUN pnpm install --no-frozen-lockfile --filter uniplate...
+RUN npm install
 
-RUN pnpm --filter uniplate build
+COPY packages/uniplate/ .
+
+RUN npm run build
 
 ENV NODE_ENV=production
 EXPOSE 3000
 
-# next start reads $PORT injected by Railway (defaults to 3000)
-CMD ["pnpm", "--filter", "uniplate", "start"]
+CMD ["npm", "start"]
